@@ -79,7 +79,7 @@
     <string name="story_slider">Schieberegler</string>
     <string name="story_quizzed">Du hast bereits geantwortet!</string>
     <string name="story_mentions">Erwähnungen</string>
-    <string name="story_question">Question</string>
+    <string name="story_question">Frage</string>
     <string name="priv_acc">Dieser Account ist privat</string>
     <string name="priv_acc_confirm">Du wirst nicht mehr auf Beiträge zugreifen können, wenn du entfolgst! Bist du sicher?</string>
     <string name="are_you_sure">Bist du sicher?</string>
@@ -219,8 +219,8 @@
     <string name="action_archive">Story-Archiv</string>
     <string name="action_ayml">Vorgeschlagene Benutzer</string>
     <plurals name="activity_count_total">
-        <item quantity="one">You have %d notification</item>
-        <item quantity="other">You have %d notifications</item>
+        <item quantity="one">Du hast %d Benachrichtigung</item>
+        <item quantity="other">Du hast %d Benachrichtigungen</item>
     </plurals>
     <string name="activity_count_relationship">%d Abonnenten</string>
     <string name="activity_count_comments">%d Kommentare</string>
@@ -316,7 +316,7 @@
     <string name="corners">Ecken</string>
     <string name="show_grid_gap">Rasterabstand anzeigen</string>
     <string name="post_not_found">Beitrag nicht gefunden!</string>
-    <string name="no_external_app_url">No apps for opening URLs found</string>
+    <string name="no_external_app_url">Keine Apps zum Öffnen von URLs gefunden</string>
     <string name="gallery">Galerie</string>
     <string name="camera">Kamera</string>
     <string name="all_photos">Alle Fotos</string>
@@ -471,9 +471,9 @@
     <string name="share_via_dm">Über PN teilen</string>
     <string name="share_link">Link teilen…</string>
     <string name="slide_to_cancel">Zum Abbrechen wischen</string>
-    <string name="disable_screen_transitions">Disable screen transitions</string>
-    <string name="invalid_format">Invalid format</string>
+    <string name="disable_screen_transitions">Animationen deaktivieren</string>
+    <string name="invalid_format">Ungültiges Format</string>
     <string name="no_directory_picker_activity">Barinsta cannot launch Android\'s file manager. Please make sure it is installed and enabled on your device.</string>
-    <string name="story_stickers">Stickers</string>
+    <string name="story_stickers">Sticker</string>
     <string name="story_list">Story list</string>
 </resources>
