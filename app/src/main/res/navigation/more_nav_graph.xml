@@ -276,6 +276,25 @@
         <action
             android:id="@+id/action_to_profile"
             app:destination="@id/profile_non_top" />
+        
+        <action
+            android:id="@+id/action_to_image_edit"
+            app:destination="@id/imageEditFragment"
+            />
+    </fragment>
+
+    <!-- Copy of image edit fragment tag -->
+    <!-- Required to get back arrow in action bar -->
+    <!-- See https://issuetracker.google.com/issues/192395936 -->
+    <fragment
+        android:id="@+id/imageEditFragment"
+        android:name="awais.instagrabber.fragments.imageedit.ImageEditFragment"
+        android:label="Edit Photo"
+        tools:layout="@layout/fragment_image_edit">
+        <argument
+            android:name="uri"
+            app:argType="android.net.Uri"
+            app:nullable="false" />
     </fragment>
 
     <fragment

@@ -257,6 +257,11 @@
         <action
             android:id="@+id/action_to_profile"
             app:destination="@id/profile_non_top" />
+       
+        <action
+            android:id="@+id/action_to_image_edit"
+            app:destination="@id/imageEditFragment"
+            />
     </fragment>
 
     <fragment

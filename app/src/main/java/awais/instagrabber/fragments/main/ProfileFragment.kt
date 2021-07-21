@@ -1,7 +1,9 @@
 package awais.instagrabber.fragments.main
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -19,12 +21,14 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import awais.instagrabber.R
+import awais.instagrabber.activities.CameraActivity
 import awais.instagrabber.activities.MainActivity
 import awais.instagrabber.adapters.FeedAdapterV2
 import awais.instagrabber.adapters.HighlightsAdapter
@@ -97,6 +101,7 @@ class ProfileFragment : Fragment(), OnRefreshListener, ConfirmDialogFragmentCall
     private val ppOptsDialogRequestCode = 101
     private val bioDialogRequestCode = 102
     private val translationDialogRequestCode = 103
+    private val cameraRequestCode = 104
     private val feedItemCallback: FeedAdapterV2.FeedItemCallback = object : FeedAdapterV2.FeedItemCallback {
         override fun onPostClick(media: Media) {
             openPostDialog(media, -1)
@@ -217,18 +222,22 @@ class ProfileFragment : Fragment(), OnRefreshListener, ConfirmDialogFragmentCall
         }
     }
     private val onProfilePicClickListener = View.OnClickListener {
+        val visibleMenus = arrayListOf(
+            Option(getString(R.string.view_pfp), "profile_pic"),
+            Option(getString(R.string.post_story), "post_story")
+        )
+
         val hasStories = viewModel.userStories.value?.data != null
-        if (!hasStories) {
-            showProfilePicDialog()
-            return@OnClickListener
+        if (hasStories) {
+            visibleMenus.add(
+                Option(getString(R.string.show_stories), "show_stories")
+            )
         }
+
         val dialog = MultiOptionDialogFragment.newInstance(
             ppOptsDialogRequestCode,
             0,
-            arrayListOf(
-                Option(getString(R.string.view_pfp), "profile_pic"),
-                Option(getString(R.string.show_stories), "show_stories")
-            )
+            visibleMenus
         )
         dialog.show(childFragmentManager, MultiOptionDialogFragment::class.java.simpleName)
     }
@@ -401,6 +410,29 @@ class ProfileFragment : Fragment(), OnRefreshListener, ConfirmDialogFragmentCall
         super.onDestroyView()
         setupPostsDone = false
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == cameraRequestCode && resultCode == Activity.RESULT_OK) {
+            val uri = data?.data
+            if (uri is Uri) {
+                navigateToImageEditFragment(uri)
+            } else {
+                Log.w(TAG, "data is null!")
+                return
+            }
+        }
+    }
+
+    private fun navigateToImageEditFragment(uri: Uri) {
+        try {
+            val navDirections: NavDirections = ProfileFragmentDirections.actionToImageEdit(uri)
+            NavHostFragment.findNavController(this).navigate(navDirections)
+        } catch (e: java.lang.Exception) {
+            Log.e(TAG, "navigateToImageEditFragment: ", e)
+        }
+    }
+
 
     private fun shareProfileViaDm() {
         try {
@@ -981,6 +1013,10 @@ class ProfileFragment : Fragment(), OnRefreshListener, ConfirmDialogFragmentCall
                 } catch (e: Exception) {
                     Log.e(TAG, "omPpOptionSelect: ", e)
                 }
+            }
+            "post_story" -> {
+                val intent = Intent(context, CameraActivity::class.java)
+                startActivityForResult(intent, cameraRequestCode)
             }
         }
     }

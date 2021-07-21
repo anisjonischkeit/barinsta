@@ -65,6 +65,7 @@
     <string name="post_viewer_download_current">Current</string>
     <string name="post_viewer_download_album">Whole Album</string>
     <string name="show_stories">Show stories</string>
+    <string name="post_story">Post story</string>
     <string name="no_more_stories">No more stories!</string>
     <string name="view_post">View Post</string>
     <string name="story_poll">Poll</string>
